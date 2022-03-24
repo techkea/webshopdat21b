@@ -62,4 +62,23 @@ public class ProductRepository {
         }
         return productList;
     }
+
+    public void addProduct(Product product){
+        //connect
+        getConnection();
+        try {
+            //prep statement
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO product(name, price) VALUES (?, ?)");
+            //set attributer
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setInt(2, product.getPrice());
+            //execute statement
+            preparedStatement.executeUpdate();
+        }
+        catch(SQLException sqlException){
+            System.out.println("Could not create");
+            sqlException.printStackTrace();
+        }
+    }
 }
