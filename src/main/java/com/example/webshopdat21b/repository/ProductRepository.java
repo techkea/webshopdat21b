@@ -11,8 +11,8 @@ import java.util.List;
 public class ProductRepository {
 
     private final static String DB_URL = "jdbc:mysql://localhost:3306/webshop";
-    private final static String UID = "web_user";//"root";
-    private final static String PWD = "LangTekstDerErLetAtHuske.";//"qJiw03K2zwJD";
+    private final static String UID = "webshop_user"; //"root";
+    private final static String PWD = "LangTekstDerErLetAtHuske27."; //"qJiw03K2zwJD";
 
     Connection connection = null;
 

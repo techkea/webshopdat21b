@@ -1,9 +1,9 @@
-DROP USER IF EXISTS web_user@localhost;
-CREATE USER web_user@localhost IDENTIFIED BY 'LangTekstDerErLetAtHuske.';
+DROP USER IF EXISTS webshop_user@localhost;
+CREATE USER webshop_user@localhost IDENTIFIED BY 'LangTekstDerErLetAtHuske.';
 
 GRANT SELECT, INSERT, UPDATE, DELETE
     ON webshop.*
-    TO web_user@localhost;
+    TO webshop_user@localhost;
 
 SELECT User, Host FROM mysql.user;
-SHOW GRANTS FOR web_user@localhost;
+SHOW GRANTS FOR webshop_user@localhost;
