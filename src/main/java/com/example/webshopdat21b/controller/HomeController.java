@@ -19,4 +19,22 @@ public class HomeController {
         model.addAttribute("products", productRepository.getAll());
         return "index";
     }
+
+    @GetMapping("/thymeleaf")
+    public String thymeleaf(Model model){
+        model.addAttribute("name", "Frederik");
+        model.addAttribute("class", "Dat21b");
+        return "thymeleaf";
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
