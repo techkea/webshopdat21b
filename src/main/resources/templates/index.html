@@ -18,6 +18,8 @@
         <th>
             Pris
         </th>
+        <th>slet?
+        </th>
     </tr>
     </thead>
     <tbody>
@@ -30,6 +32,9 @@
             </td>
             <td th:text="${product.price}">
                 42
+            </td>
+            <td>
+                <a th:href="@{'/delete/' + ${product.id}}"> Slet </a>
             </td>
         </tr>
     </tbody>

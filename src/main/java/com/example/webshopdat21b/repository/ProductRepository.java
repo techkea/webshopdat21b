@@ -1,6 +1,7 @@
 package com.example.webshopdat21b.repository;
 
 import com.example.webshopdat21b.model.Product;
+import com.zaxxer.hikari.pool.HikariProxyCallableStatement;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -78,6 +79,25 @@ public class ProductRepository {
         }
         catch(SQLException sqlException){
             System.out.println("Could not create");
+            sqlException.printStackTrace();
+        }
+    }
+
+    public void deleteById(int id){
+        //connect
+        getConnection();
+        try {
+            //create prepared statement
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "DELETE FROM product WHERE id = ?"
+            );
+            //set parameter
+            preparedStatement.setInt(1, id);
+            //execute statement
+            preparedStatement.executeUpdate();
+        }
+        catch(SQLException sqlException){
+            System.out.println("Could not delete!");
             sqlException.printStackTrace();
         }
     }
