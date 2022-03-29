@@ -18,23 +18,23 @@ public class ProductRepository {
     Connection connection = null;
 
     //get connection
-    public Connection getConnection(){
+    public Connection getConnection() {
         //connection er en singleton
         //connection already initialized?
-        if (connection!=null) return connection;
+        if (connection != null) return connection;
 
         //initialize connection
-        try{
+        try {
             connection = DriverManager.getConnection(DB_URL, UID, PWD);
 
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Could not connect");
             e.printStackTrace();
         }
         return connection;
 
     }
+
     public List<Product> getAll() {
         List<Product> productList = new ArrayList<>();
         getConnection();
@@ -64,7 +64,7 @@ public class ProductRepository {
         return productList;
     }
 
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
         //connect
         getConnection();
         try {
@@ -76,14 +76,13 @@ public class ProductRepository {
             preparedStatement.setInt(2, product.getPrice());
             //execute statement
             preparedStatement.executeUpdate();
-        }
-        catch(SQLException sqlException){
+        } catch (SQLException sqlException) {
             System.out.println("Could not create");
             sqlException.printStackTrace();
         }
     }
 
-    public void deleteById(int id){
+    public void deleteById(int id) {
         //connect
         getConnection();
         try {
@@ -95,10 +94,58 @@ public class ProductRepository {
             preparedStatement.setInt(1, id);
             //execute statement
             preparedStatement.executeUpdate();
-        }
-        catch(SQLException sqlException){
+        } catch (SQLException sqlException) {
             System.out.println("Could not delete!");
             sqlException.printStackTrace();
         }
     }
+
+    public void updateProduct(Product product) {
+        final String UPDATE_QUERY = "UPDATE product SET name = ?, price = ? WHERE id = ?";
+        int id = product.getId();
+        String name = product.getName();
+        int price = product.getPrice();
+        Connection con = getConnection();    //Connection
+        try {
+            PreparedStatement psUpdateRow = con.prepareStatement(UPDATE_QUERY);  //prepared statement
+            psUpdateRow.setString(1, name);
+            psUpdateRow.setInt(2, price);
+            psUpdateRow.setInt(3, id);
+            psUpdateRow.executeUpdate();  // Execute query
+            System.out.println("Row updated");
+        } catch (SQLException e) {
+            System.out.println("Could not update");
+            e.printStackTrace();
+        }
+    }
+
+    public Product findProductById(int id){
+        Connection con = getConnection(); //connection
+        try {
+
+            Statement s = connection.createStatement();
+            final String SQL_QUERY = "SELECT * FROM product WHERE id = ?"; //" WHERE id = 1 OR 1=1; --";
+
+            PreparedStatement psProduct = con.prepareStatement(SQL_QUERY); //prepared statement
+
+            psProduct.setInt(1, id); // set id der skal søges på
+            ResultSet rs = psProduct.executeQuery();  // Execute query
+
+            //read data from resultset
+            rs.next();
+            {
+                int pId = rs.getInt(1);
+                String pName = rs.getString(2);
+                int pPrice = rs.getInt(3);
+                //System.out.println(id + " " + name + " " + price);
+                return new Product(pId, pName, pPrice);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Could not create connection");
+            e.printStackTrace();
+        }
+        return null; //product not found
+    }
+
 }

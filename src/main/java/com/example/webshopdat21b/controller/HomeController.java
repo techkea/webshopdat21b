@@ -69,6 +69,33 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @GetMapping("/update/{id}")
+    public String showUpdateProduct(@PathVariable("id") int id, Model model){
+        //check evt. om product findes
+
+        //tilføj product til modelattribut
+        model.addAttribute("product", productRepository.findProductById(id));
+        //hvis update-side
+        return "update";
+    }
+
+    @PostMapping("/update")
+    public String updateProduct(@ModelAttribute Product product){
+
+        //gem opdateret produkt
+        productRepository.updateProduct(product);
+
+        //vis liste af produkter
+        return "redirect:/";
+
+    }
+
+    @GetMapping("/image/{id}")
+    public String showImage(@PathVariable("id") int id, Model model){
+        model.addAttribute("id", id);
+        return "image";
+    }
+
 }
 
 

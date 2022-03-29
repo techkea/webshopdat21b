@@ -18,8 +18,11 @@
         <th>
             Pris
         </th>
-        <th>slet?
+        <th>
+            Image
         </th>
+        <th>slet?</th>
+        <th>update</th>
     </tr>
     </thead>
     <tbody>
@@ -34,10 +37,18 @@
                 42
             </td>
             <td>
+                <img th:src="@{'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + ${product.id} + '.png'}">
+            </td>
+            <td>
                 <a th:href="@{'/delete/' + ${product.id}}"> Slet </a>
+            </td>
+            <td>
+                <a th:href="@{'/update/' + ${product.id}}"> Opdater </a>
             </td>
         </tr>
     </tbody>
 </table>
+
+<a th:href="@{/create}">Opret produkt</a>
 </body>
 </html>
