@@ -1,7 +1,7 @@
 package com.example.webshopdat21b.repository;
 
 import com.example.webshopdat21b.model.Product;
-import com.zaxxer.hikari.pool.HikariProxyCallableStatement;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -11,16 +11,30 @@ import java.util.List;
 @Repository
 public class ProductRepository {
 
-    private final static String DB_URL = "jdbc:mysql://localhost:3306/webshop";
-    private final static String UID = "webshop_user"; //"root";
-    private final static String PWD = "LangTekstDerErLetAtHuske27."; //"qJiw03K2zwJD";
+    //database-url, user og pwd flyttes til application.properties - kan flyttes til config
+    //private final static String DB_URL = "jdbc:mysql://localhost:3306/webshop";
+    //private final static String UID = "webshop_user"; //"root";
+    //private final static String PWD = "LangTekstDerErLetAtHuske27."; //"qJiw03K2zwJD";
+    private static String DB_URL;
+    private static String UID;
+    private static String PWD;
 
-    Connection connection = null;
+    private Connection connection = null;
+    private Environment environment;
+
+    //dependency injection af environment variable
+    public ProductRepository(Environment env){
+        environment = env;
+    }
 
     //get connection
     public Connection getConnection() {
         //connection er en singleton
         //connection already initialized?
+        DB_URL = environment.getProperty("spring.datasource.url");
+        UID = environment.getProperty("spring.datasource.username");
+        PWD = environment.getProperty("spring.datasource.password");
+
         if (connection != null) return connection;
 
         //initialize connection
