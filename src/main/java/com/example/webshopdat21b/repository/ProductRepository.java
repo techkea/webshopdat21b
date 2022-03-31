@@ -1,7 +1,7 @@
 package com.example.webshopdat21b.repository;
 
 import com.example.webshopdat21b.model.Product;
-import org.springframework.context.EnvironmentAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class ProductRepository implements EnvironmentAware {
+public class ProductRepository {
 
     //database-url, user og pwd flyttes til application.properties - kan flyttes til config
     //private final static String DB_URL = "jdbc:mysql://localhost:3306/webshop";
@@ -24,9 +24,13 @@ public class ProductRepository implements EnvironmentAware {
     private Environment environment;
 
     //dependency injection af environment variable
+    //@Autowired //tvinger Spring til at bruge denne constructor
     public ProductRepository(Environment env){
         environment = env;
     }
+
+    //extra constructor - vælges som default
+    public ProductRepository(){}
 
     //get connection
     public Connection getConnection() {
@@ -163,8 +167,4 @@ public class ProductRepository implements EnvironmentAware {
         return null; //product not found
     }
 
-    @Override
-    public void setEnvironment(Environment environment) {
-        this.environment = environment;
-    }
 }
