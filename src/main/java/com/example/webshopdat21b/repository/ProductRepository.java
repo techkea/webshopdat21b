@@ -30,7 +30,7 @@ public class ProductRepository {
     }
 
     //extra constructor - vælges som default
-    public ProductRepository(){}
+    //Ypublic ProductRepository(){}
 
     //get connection
     public Connection getConnection() {
