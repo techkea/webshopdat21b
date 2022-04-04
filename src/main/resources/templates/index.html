@@ -8,23 +8,23 @@
 <body>
 <div class="container">
 <h1>Produktliste</h1>
-<table>
+<table class="table table-bordered table-striped text-center align-middle">
     <thead>
     <tr>
-        <th>
+        <th scope="col">
             Id
         </th>
-        <th>
+        <th scope="col">
             Navn
         </th>
-        <th>
+        <th scope="col">
             Pris
         </th>
-        <th>
+        <th scope="col">
             Image
         </th>
-        <th>slet?</th>
-        <th>update</th>
+        <th scope="col">slet?</th>
+        <th scope="col">update</th>
     </tr>
     </thead>
     <tbody>
@@ -42,16 +42,16 @@
                 <img th:src="@{'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + ${product.id} + '.png'}">
             </td>
             <td>
-                <a th:href="@{'/delete/' + ${product.id}}"> Slet </a>
+                <a th:href="@{'/delete/' + ${product.id}}" class="btn btn-danger"> Slet </a>
             </td>
             <td>
-                <a th:href="@{'/update/' + ${product.id}}"> Opdater </a>
+                <a th:href="@{'/update/' + ${product.id}}" class="btn btn-warning"> Opdater </a>
             </td>
         </tr>
     </tbody>
 </table>
 
-<a th:href="@{/create}">Opret produkt</a>
+<a th:href="@{/create}" class="btn btn-primary">Opret produkt</a>
 
 </div>
 </body>
