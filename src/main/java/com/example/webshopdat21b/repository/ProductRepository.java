@@ -1,7 +1,6 @@
 package com.example.webshopdat21b.repository;
 
 import com.example.webshopdat21b.model.Product;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
