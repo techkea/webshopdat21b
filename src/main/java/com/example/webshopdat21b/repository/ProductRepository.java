@@ -14,26 +14,6 @@ import static com.example.webshopdat21b.utility.ConnectionManager.getConnection;
 @Repository
 public class ProductRepository {
 
-    //database-url, user og pwd flyttes til application.properties - kan flyttes til config
-    //private final static String DB_URL = "jdbc:mysql://localhost:3306/webshop";
-    //private final static String UID = "webshop_user"; //"root";
-    //private final static String PWD = "LangTekstDerErLetAtHuske27."; //"qJiw03K2zwJD";
-    //private static String DB_URL;
-    //private static String UID;
-    //private static String PWD;
-
-    //flyttet til ConnectionManager
-    //private Environment environment;
-
-    //dependency injection af environment variable
-    //@Autowired //tvinger Spring til at bruge denne constructor
-    //public ProductRepository(Environment env){
-    //    environment = env;
-    //}
-
-    //extra constructor - vælges som default
-    //public ProductRepository(){}
-
     public List<Product> getAll() {
         List<Product> productList = new ArrayList<>();
         //get connection from ConnectionManager
